@@ -34,18 +34,30 @@ const useFirebase = () => {
 
   // email sign in
   const signUpWithEmail = (email: string, password: string) => {
-    createUserWithEmailAndPassword(auth, email, password).then(
-      (result: any) => {
+    dispatch(setIsLoading(true));
+    if (email === "" || password === "") {
+      return;
+    }
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result: any) => {
         console.log(result.user);
-      }
-    );
+      })
+      .catch((e: any) => dispatch(setError(e.message)))
+      .finally(() => dispatch(setIsLoading(false)));
   };
 
   // log in email
   const logInEmailPass = (email: string, password: string) => {
-    signInWithEmailAndPassword(auth, email, password).then((user: any) => {
-      console.log(user.user);
-    });
+    dispatch(setIsLoading(true));
+    if (email === "" || password === "") {
+      return;
+    }
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user: any) => {
+        console.log(user.user);
+      })
+      .catch((e: any) => dispatch(setError(e.message)))
+      .finally(() => dispatch(setIsLoading(false)));
   };
 
   // logout function
@@ -65,6 +77,7 @@ const useFirebase = () => {
         dispatch(setUser({}));
         navigate("/login");
       }
+      dispatch(setIsLoading(false));
       return () => unsubscribed;
     });
   }, [auth, dispatch, navigate]);

@@ -30,21 +30,22 @@ const Chats: FC = () => {
       .catch(() => {
         let formData = new FormData();
         formData.append("email", user.email);
-        formData.append("username", user.email);
+        formData.append("username", user?.email?.split("@")[0]);
         formData.append("secret", user.uid);
-        getFile("https://cdn-icons-png.flaticon.com/512/149/149071.png").then(
-          (avatar: any) => {
-            formData.append("avatar", avatar, avatar.name);
-            axios
-              .post("https://api.chatengine.io/users", formData, {
-                headers: {
-                  "PRIVATE-KEY": "7ee41756-f46e-4b07-af78-3d99451f5f9c",
-                },
-              })
-              .then(() => setLoading(false))
-              .catch((e) => console.log(e));
-          }
-        );
+        getFile(
+          user.photoURL ||
+            "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+        ).then((avatar: any) => {
+          formData.append("avatar", avatar, avatar.name);
+          axios
+            .post("https://api.chatengine.io/users", formData, {
+              headers: {
+                "PRIVATE-KEY": "7ee41756-f46e-4b07-af78-3d99451f5f9c",
+              },
+            })
+            .then(() => setLoading(false))
+            .catch((e) => console.log(e));
+        });
       });
   }, [user]);
   if (!user.email || loading) {
@@ -61,7 +62,7 @@ const Chats: FC = () => {
       <ChatEngine
         height="calc(100vh-66px)"
         projectID="f1551e18-1efd-43ce-b128-e788ff1a25c4"
-        userName={user.email}
+        userName={user?.email?.split("@")[0]}
         userSecret={user.uid}
       />
     </div>

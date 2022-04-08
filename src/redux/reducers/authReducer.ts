@@ -21,7 +21,7 @@ const authReducer = (state = initialState, action: any) => {
     case "SET_IS_LOADING": {
       return {
         ...state,
-        isloading: action.payload,
+        isLoading: action.payload,
       };
     }
     case "SET_ERROR": {

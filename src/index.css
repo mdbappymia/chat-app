@@ -99,3 +99,51 @@
   left: calc(50vw - 33px);
   top: calc(50vh - 22px);
 }
+
+.login-form {
+  display: flex;
+  width: 50%;
+  margin: auto;
+}
+.login-form input {
+  display: block;
+  padding: 2px 5px;
+}
+.form-label label {
+  display: block;
+  padding: 2px 5px;
+}
+.login-button-div {
+  display: flex;
+}
+.login-button-div button {
+  padding: 5px 10px;
+  color: wheat;
+  font-weight: bold;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  margin: 10px 0;
+}
+.form-login-button {
+  background-color: indigo;
+  cursor: pointer;
+}
+.form-login-button:hover {
+  background-color: rgb(0, 85, 255);
+}
+.form-signup-button {
+  cursor: pointer;
+  background-color: blueviolet;
+}
+.form-signup-button:hover {
+  background-color: #096dd9;
+}
+.link {
+  margin-left: 10px;
+  color: blue;
+}
+.link:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
